@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Crypto Wallet Widget</title>
+<style>
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 10px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: #1e293b;
+  padding: 16px;
+  margin-bottom: 14px;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+.top-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.logo {
+  width: 60px;
+  height: 60px;
+}
+
+.coin-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.coin-name {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
+.address {
+  margin: 10px 0;
+  font-size: 14px;
+  word-break: break-all;
+  background: #0f172a;
+  padding: 6px 8px;
+  border-radius: 8px;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+button {
+  background: transparent;
+  border: 2px solid #3b82f6;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background 0.2s, color 0.2s;
+}
+
+button:hover {
+  background: #2563eb;
+  color: white;
+}
+
+.footer {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+  font-size: 12px;
+  opacity: 0.6;
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="cryptoContainer"></div>
+<div class="footer">©️SkeletalPanda</div>
+
+<script>
+// Your wallet addresses here
+const ADDRESSES = {
+  bitcoin: "YOUR_BTC_ADDRESS",
+  ethereum: "YOUR_ETH_ADDRESS",
+  binancecoin: "YOUR_BNB_ADDRESS",
+  solana: "YOUR_SOL_ADDRESS",
+  litecoin: "YOUR_LTC_ADDRESS",
+  dogecoin: "YOUR_DOGE_ADDRESS",
+  tron: "YOUR_TRX_ADDRESS"
+};
+
+const SYMBOLS = {
+  bitcoin: "BTC",
+  ethereum: "ETH",
+  binancecoin: "BNB",
+  solana: "SOL",
+  litecoin: "LTC",
+  dogecoin: "DOGE",
+  tron: "TRX"
+};
+
+const EXPLORERS = {
+  bitcoin: (addr) => `https://www.blockchain.com/btc/address/${addr}`,
+  ethereum: (addr) => `https://etherscan.io/address/${addr}`,
+  binancecoin: (addr) => `https://bscscan.com/address/${addr}`,
+  solana: (addr) => `https://solscan.io/account/${addr}`,
+  litecoin: (addr) => `https://blockchair.com/litecoin/address/${addr}`,
+  dogecoin: (addr) => `https://blockchair.com/dogecoin/address/${addr}`,
+  tron: (addr) => `https://tronscan.org/#/address/${addr}`
+};
+
+// Coins tracked on CoinGecko
+const COINGECKO_IDS = {
+  bitcoin: "bitcoin",
+  ethereum: "ethereum",
+  binancecoin: "binancecoin",
+  solana: "solana",
+  litecoin: "litecoin",
+  dogecoin: "dogecoin",
+  tron: "tron"
+};
+
+// Fetch prices
+async function fetchPrices() {
+  const ids = Object.values(COINGECKO_IDS).join(",");
+  const res = await fetch(
+    `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${ids}`
+  );
+  const data = await res.json();
+
+  return data.map(coin => {
+    for (const key in COINGECKO_IDS) {
+      if (COINGECKO_IDS[key] === coin.id) coin.id = key;
+    }
+    return coin;
+  });
+}
+
+// Copy wallet address
+function copyAddress(addr) {
+  navigator.clipboard.writeText(addr);
+  alert("Copied!");
+}
+
+// Update the widget
+async function update() {
+  const prices = await fetchPrices();
+  const container = document.getElementById("cryptoContainer");
+  container.innerHTML = "";
+
+  prices.forEach(coin => {
+    const addr = ADDRESSES[coin.id];
+
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <div class="top-row">
+        <img class="logo" src="${coin.image}" alt="${SYMBOLS[coin.id]} logo">
+        <div class="coin-info">
+          <div class="coin-name">${SYMBOLS[coin.id]}</div>
+          <div class="price">$${coin.current_price.toLocaleString()}</div>
+        </div>
+      </div>
+      <div class="address">${addr}</div>
+      <div class="buttons">
+        <button onclick="copyAddress('${addr}')">Copy</button>
+        <button onclick="window.open('${EXPLORERS[coin.id](addr)}','_blank')">Check Balance</button>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+// Initial load + auto-update every 30 seconds
+update();
+setInterval(update, 30000);
+</script>
+
+</body>
+</html>
