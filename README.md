@@ -14,28 +14,28 @@ A simple, easy-to-use crypto wallet widget displaying 7 popular cryptocurrencies
 
 # Setup on GitHub Pages
 
-Clone or fork the repository to your GitHub account.
-
-Go to your repository Settings → Pages
-
-Under Source, switch from None to main and click Save
-
-Wait about 30–60 seconds, then refresh the page
+1. Clone or fork the repository to your GitHub account.
+2. Go to your repository **Settings → Pages**.
+3. Under **Source**, switch from **None** to **main** and click **Save**.
+4. Wait about 30–60 seconds, then refresh the page.
 
 Your public link will be available at:
 
+
 https://yourusername.github.io/repository-name/
+
 
 # Configure Your Wallet Addresses
 
 Open the file:
 
+
 index.html
 
-Navigate to the constants section near the top of the file.
 
-You will see:
+Navigate to the **constants** section near the top of the file. You will see:
 
+```javascript
 const ADDRESSES = {
   bitcoin: "YOUR_BITCOIN_ADDRESS",
   ethereum: "YOUR_ETHEREUM_ADDRESS",
@@ -61,30 +61,24 @@ const ADDRESSES = {
 };
 
 Save the file and commit the changes.
-
 Your widget will automatically update and display your wallet addresses.
 
-# Important
+Important
 
 Only edit the ADDRESSES constant.
 
 Do NOT modify:
 
-- EXPLORERS constant
-- ${addr} placeholders
-- Copy button code
-- Check Balance button code
+EXPLORERS constant
+
+${addr} placeholders
+
+Copy button code
+
+Check Balance button code
 
 These are already configured and will automatically work with your addresses.
 
-# Updating Your Widget
+Updating Your Widget
 
 Any changes you commit to index.html will automatically update on your GitHub Pages site after refreshing.
-
-# Contributing
-
-Customize the UI, add more cryptocurrencies, or suggest improvements. Pull requests and issues are welcome.
-
-# License
-
-MIT License. See LICENSE for details.
