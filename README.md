@@ -1,39 +1,8 @@
-# Public Crypto Wallet Widget
-
-A simple, easy-to-use crypto wallet widget displaying 7 popular cryptocurrencies with live USD prices. Users can copy wallet addresses or check balances on blockchain explorers. Ideal for GitHub Pages or personal websites.
-
-# Features
-
-- Supports Bitcoin (BTC), Ethereum (ETH), Binance Coin (BNB), Solana (SOL), Litecoin (LTC), Dogecoin (DOGE), Tron (TRX)
-- Real-time prices via CoinGecko API
-- Copy wallet addresses with one click
-- Open wallet in blockchain explorers
-- Clean dark-themed UI with hover effects
-- Auto-refreshes every 30 seconds
-- No backend required
-
-# Setup on GitHub Pages
-
-1. Clone or fork the repository to your GitHub account.
-2. Go to your repository **Settings → Pages**.
-3. Under **Source**, switch from **None** to **main** and click **Save**.
-4. Wait about 30–60 seconds, then refresh the page.
-
-Your public link will be available at:
-
-
-https://yourusername.github.io/repository-name/
-
-
 # Configure Your Wallet Addresses
 
-Open the file:
+Open the file `index.html` and find the `ADDRESSES` constant near the top.  
 
-
-index.html
-
-
-Navigate to the **constants** section near the top of the file. You will see:
+You will see something like this:
 
 ```javascript
 const ADDRESSES = {
@@ -46,7 +15,7 @@ const ADDRESSES = {
   tron: "YOUR_TRON_ADDRESS"
 };
 
-Replace each "YOUR_..._ADDRESS" value with your own wallet address.
+Replace each "YOUR_..._ADDRESS" with your actual wallet address.
 
 Example:
 
@@ -60,14 +29,11 @@ const ADDRESSES = {
   tron: "Texample123..."
 };
 
-Save the file and commit the changes.
+Save the file and commit your changes.
 Your widget will automatically update and display your wallet addresses.
 
-Important
-
-Only edit the ADDRESSES constant.
-
-Do NOT modify:
+Important:
+Only edit the ADDRESSES constant. Do NOT modify:
 
 EXPLORERS constant
 
@@ -76,9 +42,3 @@ ${addr} placeholders
 Copy button code
 
 Check Balance button code
-
-These are already configured and will automatically work with your addresses.
-
-Updating Your Widget
-
-Any changes you commit to index.html will automatically update on your GitHub Pages site after refreshing.
