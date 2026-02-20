@@ -1,10 +1,10 @@
 Configure Your Wallet Addresses
 
-To use the widget with your own wallets, open the file:
+To use the widget with your own wallets, open:
 
 index.html
 
-Navigate to the constants section near the top of the file. You will see this code:
+Navigate to the constants section near the top of the file. You will see:
 
 const ADDRESSES = {
   bitcoin: "YOUR_BITCOIN_ADDRESS",
@@ -18,7 +18,8 @@ const ADDRESSES = {
 
 Replace each "YOUR_..._ADDRESS" value with your own wallet address.
 
-Example
+Example:
+
 const ADDRESSES = {
   bitcoin: "bc1qexample123...",
   ethereum: "0xexample123...",
@@ -37,17 +38,7 @@ Important
 
 Only edit the ADDRESSES constant.
 
-Do NOT modify:
-
-EXPLORERS constant
-
-Any ${addr} placeholders
-
-The Copy button code
-
-The Check Balance button code
-
-These are already configured and will automatically work with your addresses.
+Do NOT modify the EXPLORERS constant, ${addr} placeholders, or the Copy and Check Balance buttons. These are already configured and will work automatically.
 
 Publish with GitHub Pages
 
@@ -55,13 +46,9 @@ After committing your changes:
 
 Go to your repository Settings → Pages
 
-Under Source, select:
+Under Source, switch from None to main and click Save
 
-Branch: main
-
-Folder: / (root)
-
-Click Save
+Wait about 30–60 seconds, then refresh the page
 
 Your widget will be live at:
 
