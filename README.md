@@ -18,8 +18,7 @@ const ADDRESSES = {
 
 Replace each "YOUR_..._ADDRESS" value with your own wallet address.
 
-Example:
-
+Example
 const ADDRESSES = {
   bitcoin: "bc1qexample123...",
   ethereum: "0xexample123...",
@@ -40,7 +39,7 @@ Only edit the ADDRESSES constant.
 
 Do NOT modify:
 
-The EXPLORERS constant
+EXPLORERS constant
 
 Any ${addr} placeholders
 
